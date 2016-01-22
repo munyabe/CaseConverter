@@ -53,6 +53,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CaseConverterPackage.cs" />
+    <Compile Include="CommandBase.cs" />
     <Compile Include="ConvertCaseCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
