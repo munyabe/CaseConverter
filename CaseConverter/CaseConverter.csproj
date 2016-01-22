@@ -66,6 +66,10 @@
     <VSCTCompile Include="CaseConverterPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
+    <Content Include="LICENSE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\CaseConverterPackage.ico" />
     <Content Include="Resources\ConvertCaseCommand.png" />
   </ItemGroup>

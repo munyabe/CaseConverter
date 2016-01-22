@@ -4,6 +4,7 @@
     <Identity Id="CaseConverter.Haruaki Amabe.7e5a6c19-9a57-4f94-8d44-9501777f8c3e" Version="1.0" Language="en-US" Publisher="Haruaki Amabe" />
     <DisplayName>CaseConverter</DisplayName>
     <Description>Empty VSIX Project.</Description>
+    <License>LICENSE.txt</License>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[14.0]" />
