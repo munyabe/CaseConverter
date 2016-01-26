@@ -68,24 +68,32 @@ namespace CaseConverter
         /// <param name="e">イベント引数</param>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            ShowMessage();
-            Execute();
+            try
+            {
+                Execute();
+            }
+            catch (Exception ex)
+            {
+                ShowMessageBox(
+                    string.Format(CultureInfo.CurrentCulture, "{0} is not executable.", GetType().Name),
+                    string.Format(CultureInfo.CurrentCulture, "{0}: {1}.", ex.GetType().FullName, ex.Message),
+                    OLEMSGICON.OLEMSGICON_WARNING);
+            }
         }
 
         /// <summary>
-        /// メッセージを表示します。
+        /// メッセージボックスを表示します。
         /// </summary>
-        private void ShowMessage()
+        /// <param name="title">メッセージのタイトル</param>
+        /// <param name="message">表示するメッセージ</param>
+        /// <param name="icon">表示するアイコン</param>
+        private void ShowMessageBox(string title, string message, OLEMSGICON icon)
         {
-            var message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", GetType().FullName);
-            var title = "Execute Command";
-
-            // Show a message box to prove we were here
             VsShellUtilities.ShowMessageBox(
                 ServiceProvider,
                 message,
                 title,
-                OLEMSGICON.OLEMSGICON_INFO,
+                icon,
                 OLEMSGBUTTON.OLEMSGBUTTON_OK,
                 OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
         }
