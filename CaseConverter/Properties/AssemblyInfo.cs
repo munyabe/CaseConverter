@@ -31,3 +31,7 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+#if DEBUG
+[assembly: InternalsVisibleTo("Test.CaseConverter, PublicKey=00240000048000009400000006020000002400005253413100040000010001002df89654061bb4a3d0fc60074c25620777fe61a938a9764ab740fd379ea65c8fad32887500554609b7e8b5b577074ebe1886f4eb94080953dd18e616b25c3e4749f526c09267f42ed2331b137ebdb56bda07e0bc695e173f5595868d4bcc18e754d3137136c69a80dfbe12c07c1e4f40648d9aba78ef7a3c0b9db3ee38f45c9c")]
+#endif
