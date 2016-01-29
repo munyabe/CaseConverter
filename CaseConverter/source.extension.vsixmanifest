@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="CaseConverter.Haruaki Amabe.7e5a6c19-9a57-4f94-8d44-9501777f8c3e" Version="1.0" Language="en-US" Publisher="Haruaki Amabe" />
+    <Identity Id="CaseConverter.Munyabe.7e5a6c19-9a57-4f94-8d44-9501777f8c3e" Version="1.0" Language="en-US" Publisher="Munyabe" />
     <DisplayName>CaseConverter</DisplayName>
-    <Description>Empty VSIX Project.</Description>
+    <Description xml:space="preserve">This is a simple visual studio extension to convert text between snake_case, camelCase and PascalCase.</Description>
     <License>LICENSE.txt</License>
   </Metadata>
   <Installation>
