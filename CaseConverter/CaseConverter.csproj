@@ -52,6 +52,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="StringCaseConverter.cs" />
     <Compile Include="CaseConverterPackage.cs" />
     <Compile Include="CommandBase.cs" />
     <Compile Include="ConvertCaseCommand.cs" />

@@ -1,10 +1,11 @@
 ﻿using System;
+using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 
 namespace CaseConverter
 {
     /// <summary>
-    /// 文字列をキャメルケース⇔スネークケースに変換するコマンドです。
+    /// 文字列をスネークケース⇒キャメルケース⇒パスカルケースの順に変換するコマンドです。
     /// </summary>
     internal sealed class ConvertCaseCommand : CommandBase
     {
@@ -38,6 +39,13 @@ namespace CaseConverter
         /// <inheritdoc />
         protected override void Execute()
         {
+            var dte = ServiceProvider.GetService(typeof(DTE)) as DTE;
+            var textDocument = dte.ActiveDocument.Object("TextDocument") as TextDocument;
+            if (textDocument != null)
+            {
+                var selection = textDocument.Selection;
+                selection.Text = StringCaseConverter.Convert(selection.Text);
+            }
         }
     }
 }
