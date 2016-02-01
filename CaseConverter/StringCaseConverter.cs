@@ -18,21 +18,22 @@ namespace CaseConverter
         /// <returns>変換した文字列</returns>
         public static string Convert(string input)
         {
-            if (string.IsNullOrWhiteSpace(input))
+            var words = GetWords(input);
+            if (words.Any() == false)
             {
                 return input;
             }
             else if (input.Contains('_'))
             {
-                return GetWords(input).ToCamelCase();
+                return words.ToCamelCase();
             }
             else if (char.IsLower(input[0]))
             {
-                return GetWords(input).ToPascalCase();
+                return words.ToPascalCase();
             }
             else
             {
-                return GetWords(input).ToSnakeCase();
+                return words.ToSnakeCase();
             }
         }
 
@@ -45,6 +46,11 @@ namespace CaseConverter
         /// </remarks>
         internal static IEnumerable<string> GetWords(string input)
         {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return Enumerable.Empty<string>();
+            }
+
             return Regex.Matches(input, @"[a-z\d]+|[A-Z\d]+(?![A-Za-z\d])|[A-Z\d]+(?=[A-Z])|[A-Z][a-z\d]*").GetValues();
         }
 

@@ -25,6 +25,7 @@ namespace Test.CaseConverter
             assert(string.Empty, string.Empty);
             assert(" ", " ");
             assert("123", "123");
+            assert("+-*", "+-*");
         }
 
         [TestMethod]
