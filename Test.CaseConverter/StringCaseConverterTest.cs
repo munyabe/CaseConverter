@@ -28,10 +28,10 @@ namespace Test.CaseConverter
         }
 
         [TestMethod]
-        public void GetWordsFromCamelCaseTest()
+        public void GetWordsTest()
         {
             Action<string[], string> assert = (expected, source) =>
-                CollectionAssert.AreEquivalent(expected, StringCaseConverter.GetWordsFromCamelCase(source).ToArray());
+                CollectionAssert.AreEquivalent(expected, StringCaseConverter.GetWords(source).ToArray());
 
             assert(new[] { "Hoge", "Fuga", "Piyo" }, "HogeFugaPiyo");
             assert(new[] { "hoge", "Fuga", "Piyo" }, "hogeFugaPiyo");
@@ -72,22 +72,6 @@ namespace Test.CaseConverter
             assert(new[] { "Hoge", "Fuga", "Piyo" }, "Hoge+Fuga-Piyo*");
             assert(new[] { "Hoge", "Fuga", "Piyo" }, "+Hoge-Fuga*Piyo");
             assert(new[] { "Hoge", "Fuga", "Piyo" }, "Hoge+-Fuga**Piyo");
-        }
-
-        [TestMethod]
-        public void GetWordsFromSnakeCaseTest()
-        {
-            Action<string[], string> assert = (expected, source) =>
-                CollectionAssert.AreEquivalent(expected, StringCaseConverter.GetWordsFromSnakeCase(source).ToArray());
-
-            assert(new[] { "hoge", "fuga", "piyo" }, "hoge_fuga_piyo");
-            assert(new[] { "HOGE", "FUGA", "PIYO" }, "HOGE_FUGA_PIYO");
-
-            assert(new[] { "hoge", "f", "piyo" }, "hoge_f_piyo");
-            assert(new[] { "hoge", "F", "piyo" }, "hoge_F_piyo");
-
-            assert(new[] { "hoge" }, "hoge");
-            assert(new[] { "HOGE" }, "HOGE");
         }
 
         [TestMethod]

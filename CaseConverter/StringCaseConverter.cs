@@ -24,36 +24,28 @@ namespace CaseConverter
             }
             else if (input.Contains('_'))
             {
-                return GetWordsFromSnakeCase(input).ToCamelCase();
+                return GetWords(input).ToCamelCase();
             }
             else if (char.IsLower(input[0]))
             {
-                return GetWordsFromCamelCase(input).ToPascalCase();
+                return GetWords(input).ToPascalCase();
             }
             else
             {
-                return GetWordsFromCamelCase(input).ToSnakeCase();
+                return GetWords(input).ToSnakeCase();
             }
         }
 
         /// <summary>
-        /// キャメルケースの文字列を単語に分割します。
+        /// 文字列を単語に分割します。
         /// </summary>
         /// <remarks>
         /// 空白や記号、小文字と大文字の境を単語の境界とします。
         /// 行末でない場所に大文字が連続する場合は、最後の1文字を除いて単語と認識します。
         /// </remarks>
-        internal static IEnumerable<string> GetWordsFromCamelCase(string input)
+        internal static IEnumerable<string> GetWords(string input)
         {
             return Regex.Matches(input, @"[a-z\d]+|[A-Z\d]+(?![A-Za-z\d])|[A-Z\d]+(?=[A-Z])|[A-Z][a-z\d]*").GetValues();
-        }
-
-        /// <summary>
-        /// スネークケースの文字列を単語に分割します。
-        /// </summary>
-        internal static IEnumerable<string> GetWordsFromSnakeCase(string input)
-        {
-            return input.Split('_');
         }
 
         /// <summary>
