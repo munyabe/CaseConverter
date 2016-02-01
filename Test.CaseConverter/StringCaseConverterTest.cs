@@ -51,6 +51,27 @@ namespace Test.CaseConverter
             assert(new[] { "ho1ge2" }, "ho1ge2");
             assert(new[] { "1hoge" }, "1hoge");
             assert(new[] { "1", "HOGE" }, "1HOGE");
+
+            // MEMO : 空白を含んだテスト
+            assert(new[] { "Hoge", "Fuga", "Piyo" }, "Hoge Fuga Piyo");
+            assert(new[] { "Hoge", "Fuga", "Piyo" }, "Hoge FugaPiyo");
+            assert(new[] { "hoge", "fuga", "Piyo" }, "hoge fuga Piyo");
+            assert(new[] { "hoge", "fuga", "Piyo" }, "hoge fugaPiyo");
+
+            // MEMO : スネークケースのテスト
+            assert(new[] { "hoge", "fuga", "piyo" }, "hoge_fuga_piyo");
+            assert(new[] { "HOGE", "FUGA", "PIYO" }, "HOGE_FUGA_PIYO");
+            assert(new[] { "hoge", "f", "piyo" }, "hoge_f_piyo");
+            assert(new[] { "hoge", "F", "piyo" }, "hoge_F_piyo");
+            assert(new[] { "HOGE", "1", "FUGA", "PIYO" }, "HOGE_1FUGA_PIYO");
+            assert(new[] { "HOGE", "FU1GA", "PIYO" }, "HOGE_FU1GA_PIYO");
+            assert(new[] { "HOGE", "FUGA1", "PIYO" }, "HOGE_FUGA1_PIYO");
+
+            // MEMO : 記号を含んだテスト
+            assert(new[] { "Hoge", "Fuga", "Piyo" }, "Hoge+Fuga-Piyo");
+            assert(new[] { "Hoge", "Fuga", "Piyo" }, "Hoge+Fuga-Piyo*");
+            assert(new[] { "Hoge", "Fuga", "Piyo" }, "+Hoge-Fuga*Piyo");
+            assert(new[] { "Hoge", "Fuga", "Piyo" }, "Hoge+-Fuga**Piyo");
         }
 
         [TestMethod]

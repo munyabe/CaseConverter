@@ -40,12 +40,12 @@ namespace CaseConverter
         /// キャメルケースの文字列を単語に分割します。
         /// </summary>
         /// <remarks>
-        /// 小文字と大文字の境を単語の境界とします。
-        /// 行末でない場所に大文字が連続する場合は、最後の1文字を除いて単語の認識します。
+        /// 空白や記号、小文字と大文字の境を単語の境界とします。
+        /// 行末でない場所に大文字が連続する場合は、最後の1文字を除いて単語と認識します。
         /// </remarks>
         internal static IEnumerable<string> GetWordsFromCamelCase(string input)
         {
-            return Regex.Matches(input, @"^[a-z\d]+|[A-Z\d]+$|[A-Z\d]+(?=[A-Z])|[A-Z][a-z\d]*").GetValues();
+            return Regex.Matches(input, @"[a-z\d]+|[A-Z\d]+(?![A-Za-z\d])|[A-Z\d]+(?=[A-Z])|[A-Z][a-z\d]*").GetValues();
         }
 
         /// <summary>
