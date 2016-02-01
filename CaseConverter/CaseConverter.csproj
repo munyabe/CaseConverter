@@ -66,6 +66,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Preview.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <VSCTCompile Include="CaseConverterPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
