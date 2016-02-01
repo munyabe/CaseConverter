@@ -73,6 +73,12 @@ namespace Test.CaseConverter
             assert(new[] { "Hoge", "Fuga", "Piyo" }, "Hoge+Fuga-Piyo*");
             assert(new[] { "Hoge", "Fuga", "Piyo" }, "+Hoge-Fuga*Piyo");
             assert(new[] { "Hoge", "Fuga", "Piyo" }, "Hoge+-Fuga**Piyo");
+
+            // MEMO : 単語がない場合のテスト
+            assert(new string[0], null);
+            assert(new string[0], string.Empty);
+            assert(new string[0], " ");
+            assert(new string[0], "+-*");
         }
 
         [TestMethod]
