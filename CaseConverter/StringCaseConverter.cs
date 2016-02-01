@@ -45,7 +45,7 @@ namespace CaseConverter
         /// </remarks>
         internal static IEnumerable<string> GetWordsFromCamelCase(string input)
         {
-            return Regex.Matches(input, @"^[a-z\d]+|[A-Z\d]+$|[A-Z]+(?=[A-Z])|[A-Z][a-z\d]*").GetValues();
+            return Regex.Matches(input, @"^[a-z\d]+|[A-Z\d]+$|[A-Z\d]+(?=[A-Z])|[A-Z][a-z\d]*").GetValues();
         }
 
         /// <summary>

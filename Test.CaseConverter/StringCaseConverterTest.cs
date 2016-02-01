@@ -43,6 +43,7 @@ namespace Test.CaseConverter
             assert(new[] { "Hoge", "Fu1ga", "Piyo" }, "HogeFu1gaPiyo");
             assert(new[] { "ho1ge2", "Fuga", "Piyo" }, "ho1ge2FugaPiyo");
             assert(new[] { "Hoge", "Fuga1", "PI2YO3" }, "HogeFuga1PI2YO3");
+            assert(new[] { "Hoge", "FU1GA", "Piyo" }, "HogeFU1GAPiyo");
 
             // MEMO : 1単語のテスト
             assert(new[] { "hoge" }, "hoge");
