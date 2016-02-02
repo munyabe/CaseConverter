@@ -72,6 +72,10 @@
     </Bitmaps>
   </Commands>
 
+  <KeyBindings>
+    <KeyBinding guid="guidCaseConverterPackageCmdSet" id="ConvertCaseCommandId" editor="guidVSStd97" key1="K" mod1="Control Shift" key2="C" mod2="Control Shift" />
+  </KeyBindings>
+
   <Symbols>
     <!-- This is the package guid. -->
     <GuidSymbol name="guidCaseConverterPackage" value="{3293cb25-75b9-4d5a-a248-ea3cf25fc4c8}" />
