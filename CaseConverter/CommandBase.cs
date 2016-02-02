@@ -19,7 +19,7 @@ namespace CaseConverter
         /// <summary>
         /// シングルトンのインスタンスを取得します。
         /// </summary>
-        public static ConvertCaseCommand Instance { get; protected set; }
+        public static CommandBase Instance { get; protected set; }
 
         /// <summary>
         /// サービスプロバイダーを取得します。
