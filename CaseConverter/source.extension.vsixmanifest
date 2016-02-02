@@ -5,6 +5,7 @@
     <DisplayName>CaseConverter</DisplayName>
     <Description xml:space="preserve">This is a simple visual studio extension to convert text between snake_case, camelCase and PascalCase.</Description>
     <License>LICENSE.txt</License>
+    <Icon>Resources\Package.ico</Icon>
     <PreviewImage>Resources\Preview.png</PreviewImage>
   </Metadata>
   <Installation>
