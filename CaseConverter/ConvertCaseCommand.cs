@@ -44,7 +44,8 @@ namespace CaseConverter
             if (textDocument != null)
             {
                 var selection = textDocument.Selection;
-                selection.Text = StringCaseConverter.Convert(selection.Text);
+                var selectedText = selection.Text;
+                selection.ReplaceText(selectedText, StringCaseConverter.Convert(selectedText));
             }
         }
     }
