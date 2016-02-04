@@ -20,6 +20,11 @@ namespace CaseConverter
         public static readonly Guid CommandSet = new Guid("f038e966-3a02-4eef-bfad-cd8fab3c4d6d");
 
         /// <summary>
+        /// シングルトンのインスタンスを取得します。
+        /// </summary>
+        public static ConvertCaseCommand Instance { get; private set; }
+
+        /// <summary>
         /// インスタンスを初期化します。
         /// </summary>
         /// <param name="package">コマンドを提供するパッケージ</param>
@@ -37,7 +42,7 @@ namespace CaseConverter
         }
 
         /// <inheritdoc />
-        protected override void Execute()
+        protected override void Execute(object sender, EventArgs e)
         {
             var dte = ServiceProvider.GetService(typeof(DTE)) as DTE;
             var textDocument = dte.ActiveDocument.Object("TextDocument") as TextDocument;

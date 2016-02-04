@@ -17,11 +17,6 @@ namespace CaseConverter
         private readonly Package _package;
 
         /// <summary>
-        /// シングルトンのインスタンスを取得します。
-        /// </summary>
-        public static CommandBase Instance { get; protected set; }
-
-        /// <summary>
         /// サービスプロバイダーを取得します。
         /// </summary>
         protected IServiceProvider ServiceProvider
@@ -59,7 +54,7 @@ namespace CaseConverter
         /// <summary>
         /// コマンドを実行します。
         /// </summary>
-        protected abstract void Execute();
+        protected abstract void Execute(object sender, EventArgs e);
 
         /// <summary>
         /// コマンドを実行した際のコールバックです。
@@ -70,7 +65,7 @@ namespace CaseConverter
         {
             try
             {
-                Execute();
+                Execute(sender, e);
             }
             catch (Exception ex)
             {
