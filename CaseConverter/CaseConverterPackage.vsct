@@ -35,11 +35,6 @@
          other menus or buttons (commands); from a visual point of view you can see the
          group as the part of a menu contained between two lines. The parent of a group
          must be a menu. -->
-    <Groups>
-      <Group guid="guidCaseConverterPackageCmdSet" id="MyMenuGroup" priority="0x0600">
-        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN"/>
-      </Group>
-    </Groups>
 
     <!--Buttons section. -->
     <!--This section defines the elements the user can interact with, like a menu command or a button
@@ -71,6 +66,12 @@
       <Bitmap guid="guidImages" href="Resources\ConvertCaseCommand.png" usedList="bmpSnakeCamel"/>
     </Bitmaps>
   </Commands>
+
+  <CommandPlacements>
+    <CommandPlacement guid="guidCaseConverterPackageCmdSet" id="ConvertCaseCommandId" priority="0x2D10">
+      <Parent guid="guidStdEditor" id="IDG_VS_EDITOR_ADVANCED_CMDS"/>
+    </CommandPlacement>
+  </CommandPlacements>
 
   <KeyBindings>
     <KeyBinding guid="guidCaseConverterPackageCmdSet" id="ConvertCaseCommandId" editor="guidVSStd97" key1="K" mod1="Control Shift" key2="C" mod2="Control Shift" />
