@@ -50,7 +50,10 @@ namespace CaseConverter
             {
                 var selection = textDocument.Selection;
                 var selectedText = selection.Text;
-                selection.ReplaceText(selectedText, StringCaseConverter.Convert(selectedText));
+                if (string.IsNullOrWhiteSpace(selectedText) == false)
+                {
+                    selection.ReplaceText(selectedText, StringCaseConverter.Convert(selectedText));
+                }
             }
         }
     }
