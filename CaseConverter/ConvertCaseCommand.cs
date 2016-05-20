@@ -49,12 +49,55 @@ namespace CaseConverter
             if (textDocument != null)
             {
                 var selection = textDocument.Selection;
-                var selectedText = selection.Text;
-                if (string.IsNullOrWhiteSpace(selectedText) == false)
+                if (selection.IsEmpty == false)
                 {
+                    var selectedText = selection.Text;
                     selection.ReplaceText(selectedText, StringCaseConverter.Convert(selectedText));
                 }
+                else
+                {
+                    var point = selection.ActivePoint;
+
+                    var startPoint = point.CreateEditPoint();
+                    if (point.AtStartOfLine == false && GetLeftText(point) != " ")
+                    {
+                        startPoint.WordLeft();
+                    }
+
+                    var endPoint = point.CreateEditPoint();
+                    if (point.AtEndOfLine == false && endPoint.GetText(1) != " ")
+                    {
+                        endPoint.WordRight();
+                    }
+
+                    var targetText = startPoint.GetText(endPoint);
+                    var word = targetText.TrimEnd(' ');
+                    var convertedWord = StringCaseConverter.Convert(word);
+
+                    if (word != convertedWord)
+                    {
+                        var left = point.AbsoluteCharOffset - startPoint.AbsoluteCharOffset;
+                        selection.CharLeft(false, left);
+
+                        var trimCount = targetText.Length - word.Length;
+                        var right = endPoint.AbsoluteCharOffset - point.AbsoluteCharOffset - trimCount;
+                        selection.CharRight(true, right);
+
+                        selection.ReplaceText(word, convertedWord);
+                    }
+                }
             }
+        }
+
+        /// <summary>
+        /// 指定の位置の左の文字を取得します。
+        /// </summary>
+        private static string GetLeftText(VirtualPoint point)
+        {
+            var editPoint = point.CreateEditPoint();
+            editPoint.CharLeft(1);
+
+            return editPoint.GetText(1);
         }
     }
 }
