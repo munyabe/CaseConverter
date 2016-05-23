@@ -62,11 +62,24 @@ namespace CaseConverter
                     if (point.AtStartOfLine == false && GetLeftText(point) != " ")
                     {
                         startPoint.WordLeft();
+
+                        var currentOffset = point.AbsoluteCharOffset;
+                        if (currentOffset - startPoint.AbsoluteCharOffset == 1)
+                        {
+                            var tempPoint = startPoint.CreateEditPoint();
+                            tempPoint.WordRight();
+
+                            if (currentOffset == tempPoint.AbsoluteCharOffset)
+                            {
+                                startPoint = point.CreateEditPoint();
+                            }
+                        }
                     }
 
                     var endPoint = point.CreateEditPoint();
                     if (point.AtEndOfLine == false && endPoint.GetText(1) != " ")
                     {
+                        endPoint = startPoint.CreateEditPoint();
                         endPoint.WordRight();
                     }
 
