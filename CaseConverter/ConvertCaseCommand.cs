@@ -104,16 +104,12 @@ namespace CaseConverter
             {
                 result.WordLeft();
 
-                var currentOffset = point.AbsoluteCharOffset;
-                if (currentOffset - result.AbsoluteCharOffset == 1)
-                {
-                    var tempPoint = result.CreateEditPoint();
-                    tempPoint.WordRight();
+                var tempPoint = result.CreateEditPoint();
+                tempPoint.WordRight();
 
-                    if (currentOffset == tempPoint.AbsoluteCharOffset)
-                    {
-                        result = point.CreateEditPoint();
-                    }
+                if (point.AbsoluteCharOffset == tempPoint.AbsoluteCharOffset)
+                {
+                    result = point.CreateEditPoint();
                 }
             }
 
