@@ -85,12 +85,13 @@ namespace CaseConverter
         private static EditPoint CreateEndPoint(VirtualPoint point, EditPoint startPoint)
         {
             var result = point.CreateEditPoint();
-            if (point.AtEndOfLine == false && result.GetText(1) != " ")
+            if (point.AtEndOfLine || result.GetText(1) == " ")
             {
-                result = startPoint.CreateEditPoint();
-                result.WordRight();
+                return result;
             }
 
+            result = startPoint.CreateEditPoint();
+            result.WordRight();
             return result;
         }
 
@@ -100,29 +101,27 @@ namespace CaseConverter
         private static EditPoint CreateStartPoint(VirtualPoint point)
         {
             var result = point.CreateEditPoint();
-            if (point.AtStartOfLine == false && GetLeftText(point) != " ")
+            if (point.AtStartOfLine || GetLeftText(point, 1) == " ")
             {
-                result.WordLeft();
-
-                var tempPoint = result.CreateEditPoint();
-                tempPoint.WordRight();
-
-                if (point.AbsoluteCharOffset == tempPoint.AbsoluteCharOffset)
-                {
-                    result = point.CreateEditPoint();
-                }
+                return result;
             }
 
-            return result;
+            result.WordLeft();
+
+            var tempPoint = result.CreateEditPoint();
+            tempPoint.WordRight();
+
+            return point.AbsoluteCharOffset == tempPoint.AbsoluteCharOffset ?
+                point.CreateEditPoint() : result;
         }
 
         /// <summary>
         /// 指定の位置の左の文字を取得します。
         /// </summary>
-        private static string GetLeftText(VirtualPoint point)
+        private static string GetLeftText(VirtualPoint point, int count)
         {
             var editPoint = point.CreateEditPoint();
-            editPoint.CharLeft(1);
+            editPoint.CharLeft(count);
 
             return editPoint.GetText(1);
         }
