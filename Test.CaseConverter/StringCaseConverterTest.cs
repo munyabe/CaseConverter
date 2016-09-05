@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CaseConverter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -14,8 +15,15 @@ namespace Test.CaseConverter
         [TestMethod]
         public void ConvertTest()
         {
+            var convertPatterns = new List<StringCasePattern>
+            {
+                StringCasePattern.CamelCase,
+                StringCasePattern.PascalCase,
+                StringCasePattern.SnakeCase
+            };
+
             Action<string, string> assert = (expected, source) =>
-                Assert.AreEqual(expected, StringCaseConverter.Convert(source));
+                Assert.AreEqual(expected, StringCaseConverter.Convert(source, convertPatterns));
 
             assert("hogeFugaPiyo", "hoge_fuga_piyo");
             assert("HogeFugaPiyo", "hogeFugaPiyo");
@@ -26,6 +34,9 @@ namespace Test.CaseConverter
             assert(" ", " ");
             assert("123", "123");
             assert("+-*", "+-*");
+
+            Assert.AreEqual("hoge_fuga_piyo", StringCaseConverter.Convert("hoge_fuga_piyo", null));
+            Assert.AreEqual("hoge_fuga_piyo", StringCaseConverter.Convert("hoge_fuga_piyo", new List<StringCasePattern>()));
         }
 
         [TestMethod]
@@ -86,7 +97,7 @@ namespace Test.CaseConverter
         public void ToCamelCaseTest()
         {
             Action<string, string[]> assert = (expected, source) =>
-                Assert.AreEqual(expected, source.ToCamelCase());
+                Assert.AreEqual(expected, StringCaseConverter.ToCamelCase(source));
 
             assert("hogeFugaPiyo", new[] { "hoge", "fuga", "piyo" });
             assert("hogeFugaPiyo", new[] { "HOGE", "fuga", "piyo" });
@@ -99,7 +110,7 @@ namespace Test.CaseConverter
         public void ToPascalCaseTest()
         {
             Action<string, string[]> assert = (expected, source) =>
-                Assert.AreEqual(expected, source.ToPascalCase());
+                Assert.AreEqual(expected, StringCaseConverter.ToPascalCase(source));
 
             assert("HogeFugaPiyo", new[] { "hoge", "fuga", "piyo" });
             assert("HogeFugaPiyo", new[] { "HOGE", "fuga", "piyo" });
@@ -112,7 +123,7 @@ namespace Test.CaseConverter
         public void ToSnakeCaseTest()
         {
             Action<string, string[]> assert = (expected, source) =>
-                Assert.AreEqual(expected, source.ToSnakeCase());
+                Assert.AreEqual(expected, StringCaseConverter.ToSnakeCase(source));
 
             assert("hoge_fuga_piyo", new[] { "hoge", "fuga", "piyo" });
             assert("hoge_fuga_piyo", new[] { "HOGE", "fuga", "piyo" });

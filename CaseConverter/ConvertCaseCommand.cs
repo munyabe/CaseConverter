@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 
@@ -9,6 +10,11 @@ namespace CaseConverter
     /// </summary>
     internal sealed class ConvertCaseCommand : CommandBase
     {
+        /// <summary>
+        /// 文字列の変換パターンです。
+        /// </summary>
+        private readonly IList<StringCasePattern> _convertPatterns = new List<StringCasePattern> { StringCasePattern.CamelCase, StringCasePattern.PascalCase, StringCasePattern.SnakeCase };
+
         /// <summary>
         /// コマンドのIDです。
         /// </summary>
@@ -52,7 +58,7 @@ namespace CaseConverter
                 if (selection.IsEmpty == false)
                 {
                     var selectedText = selection.Text;
-                    selection.ReplaceText(selectedText, StringCaseConverter.Convert(selectedText));
+                    selection.ReplaceText(selectedText, StringCaseConverter.Convert(selectedText, _convertPatterns));
                 }
                 else
                 {
@@ -62,7 +68,7 @@ namespace CaseConverter
 
                     var targetText = startPoint.GetText(endPoint);
                     var word = targetText.TrimEnd(' ');
-                    var convertedWord = StringCaseConverter.Convert(word);
+                    var convertedWord = StringCaseConverter.Convert(word, _convertPatterns);
 
                     if (word != convertedWord)
                     {
