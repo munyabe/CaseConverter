@@ -53,6 +53,10 @@
     <DeployExtension>False</DeployExtension>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Options\GeneralOption.cs" />
+    <Compile Include="Options\GeneralOptionPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="StringCaseConverter.cs" />
     <Compile Include="CaseConverterPackage.cs" />
     <Compile Include="CommandBase.cs" />
