@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 
@@ -48,7 +49,7 @@ namespace CaseConverter
             var textDocument = dte.ActiveDocument.Object("TextDocument") as TextDocument;
             if (textDocument != null)
             {
-                var convertPatterns = ((CaseConverterPackage)Package).GetGeneralOption().GetPatterns();
+                var convertPatterns = ((CaseConverterPackage)Package).GetGeneralOption().Patterns.ToList();
 
                 var selection = textDocument.Selection;
                 if (selection.IsEmpty == false)
