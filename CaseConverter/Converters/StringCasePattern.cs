@@ -1,4 +1,4 @@
-﻿namespace CaseConverter
+﻿namespace CaseConverter.Converters
 {
     /// <summary>
     /// 複合の単語をひと綴りで表す場合のパターンを表します。

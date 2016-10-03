@@ -59,12 +59,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Options\StringCasePatternArrayConverter.cs" />
-    <Compile Include="StringCaseConverter.cs" />
+    <Compile Include="Converters\StringCaseConverter.cs" />
     <Compile Include="CaseConverterPackage.cs" />
     <Compile Include="CommandBase.cs" />
     <Compile Include="ConvertCaseCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringCasePattern.cs" />
+    <Compile Include="Converters\StringCasePattern.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />
@@ -170,6 +170,7 @@
       <ManifestResourceName>VSPackage</ManifestResourceName>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

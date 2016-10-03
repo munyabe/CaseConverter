@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace CaseConverter
+namespace CaseConverter.Converters
 {
     /// <summary>
     /// 文字列のケースを変換するクラスです。

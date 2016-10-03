@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using CaseConverter.Converters;
 
 namespace CaseConverter.Options
 {

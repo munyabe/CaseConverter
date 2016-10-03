@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CaseConverter;
+using CaseConverter.Converters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Test.CaseConverter
+namespace Test.CaseConverter.Converters
 {
     /// <summary>
     /// <see cref="StringCaseConverter"/>のテストクラスです。

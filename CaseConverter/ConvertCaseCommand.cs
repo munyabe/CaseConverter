@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CaseConverter.Converters;
 using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 
