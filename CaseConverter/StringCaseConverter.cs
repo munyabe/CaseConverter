@@ -42,6 +42,27 @@ namespace CaseConverter
         }
 
         /// <summary>
+        /// 指定した文字列のパターンを判定します。
+        /// </summary>
+        /// <param name="input">判定する文字列</param>
+        /// <returns>文字列のパターン</returns>
+        internal static StringCasePattern GetCasePattern(string input)
+        {
+            if (input.Contains('_'))
+            {
+                return StringCasePattern.SnakeCase;
+            }
+            else if (char.IsLower(input[0]))
+            {
+                return StringCasePattern.CamelCase;
+            }
+            else
+            {
+                return StringCasePattern.PascalCase;
+            }
+        }
+
+        /// <summary>
         /// 文字列を単語に分割します。
         /// </summary>
         /// <remarks>
@@ -96,25 +117,6 @@ namespace CaseConverter
         internal static string ToSnakeCase(IEnumerable<string> words)
         {
             return string.Join("_", words.Select(CultureInfo.CurrentCulture.TextInfo.ToLower));
-        }
-
-        /// <summary>
-        /// 指定した文字列のパターンを判定します。
-        /// </summary>
-        private static StringCasePattern GetCasePattern(string input)
-        {
-            if (input.Contains('_'))
-            {
-                return StringCasePattern.SnakeCase;
-            }
-            else if (char.IsLower(input[0]))
-            {
-                return StringCasePattern.CamelCase;
-            }
-            else
-            {
-                return StringCasePattern.PascalCase;
-            }
         }
 
         /// <summary>

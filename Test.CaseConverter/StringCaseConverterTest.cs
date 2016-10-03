@@ -40,6 +40,17 @@ namespace Test.CaseConverter
         }
 
         [TestMethod]
+        public void GetCasePatternTest()
+        {
+            Action<StringCasePattern, string> assert = (expected, source) =>
+                Assert.AreEqual(expected, StringCaseConverter.GetCasePattern(source));
+
+            assert(StringCasePattern.SnakeCase, "hoge_fuga_piyo");
+            assert(StringCasePattern.CamelCase, "hogeFugaPiyo");
+            assert(StringCasePattern.PascalCase, "HogeFugaPiyo");
+        }
+
+        [TestMethod]
         public void GetWordsTest()
         {
             Action<string[], string> assert = (expected, source) =>
