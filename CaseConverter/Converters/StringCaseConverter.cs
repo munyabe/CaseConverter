@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CaseConverter.Converters
@@ -12,6 +10,17 @@ namespace CaseConverter.Converters
     /// </summary>
     public static class StringCaseConverter
     {
+        /// <summary>
+        /// 文字列を変換するコンバーターのインスタンス一覧です。
+        /// </summary>
+        private static readonly Dictionary<StringCasePattern, ICaseConverter> _caseConverters =
+            new Dictionary<StringCasePattern, ICaseConverter>
+            {
+                [StringCasePattern.CamelCase] = new CamelCaseConverter(),
+                [StringCasePattern.PascalCase] = new PascalCaseConverter(),
+                [StringCasePattern.SnakeCase] = new SnakeCaseConverter()
+            };
+
         /// <summary>
         /// 文字列を指定したパターンで変換します。
         /// </summary>
@@ -38,7 +47,7 @@ namespace CaseConverter.Converters
                 nextIndex = 0;
             }
 
-            return GetConverter(patterns[nextIndex])(words);
+            return GetConverter(patterns[nextIndex]).Convert(words);
         }
 
         /// <summary>
@@ -80,60 +89,18 @@ namespace CaseConverter.Converters
         }
 
         /// <summary>
-        /// 単語をキャメルケースの文字列に連結します。
+        /// 複合の単語を指定のパターンで連結するコンバーターを取得します。
         /// </summary>
-        internal static string ToCamelCase(IEnumerable<string> words)
+        private static ICaseConverter GetConverter(StringCasePattern pattern)
         {
-            var result = new StringBuilder();
-            var isFirst = true;
-            foreach (var word in words)
+            ICaseConverter converter;
+            if (_caseConverters.TryGetValue(pattern, out converter) && converter != null)
             {
-                var top = isFirst ? char.ToLower(word[0]) : char.ToUpper(word[0]);
-                isFirst = false;
-
-                result.Append(top + word.Substring(1, word.Length - 1).ToLower());
+                return converter;
             }
-
-            return result.ToString();
-        }
-
-        /// <summary>
-        /// 単語をパスカルケースの文字列に連結します。
-        /// </summary>
-        internal static string ToPascalCase(IEnumerable<string> words)
-        {
-            var result = new StringBuilder();
-            foreach (var word in words)
+            else
             {
-                result.Append(char.ToUpper(word[0]) + word.Substring(1, word.Length - 1).ToLower());
-            }
-
-            return result.ToString();
-        }
-
-        /// <summary>
-        /// 単語をスネークケースの文字列に連結します。
-        /// </summary>
-        internal static string ToSnakeCase(IEnumerable<string> words)
-        {
-            return string.Join("_", words.Select(CultureInfo.CurrentCulture.TextInfo.ToLower));
-        }
-
-        /// <summary>
-        /// 複合の単語を指定のパターンで連結する処理を取得します。
-        /// </summary>
-        private static Func<IEnumerable<string>, string> GetConverter(StringCasePattern pattern)
-        {
-            switch (pattern)
-            {
-                case StringCasePattern.CamelCase:
-                    return ToCamelCase;
-                case StringCasePattern.PascalCase:
-                    return ToPascalCase;
-                case StringCasePattern.SnakeCase:
-                    return ToSnakeCase;
-                default:
-                    throw new NotSupportedException($"This pattern [{pattern}]is not supported.");
+                throw new InvalidOperationException($"This pattern [{pattern}]is not supported.");
             }
         }
 

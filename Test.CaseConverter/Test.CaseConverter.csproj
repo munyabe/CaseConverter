@@ -59,6 +59,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Converters\StringCaseConverterTest.cs" />
+    <Compile Include="Converters\CamelCaseConverterTest.cs" />
+    <Compile Include="Converters\PascalCaseConverterTest.cs" />
+    <Compile Include="Converters\SnakeCaseConverterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
