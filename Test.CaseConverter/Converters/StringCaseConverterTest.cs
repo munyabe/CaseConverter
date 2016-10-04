@@ -45,9 +45,10 @@ namespace Test.CaseConverter.Converters
             Action<StringCasePattern, string> assert = (expected, source) =>
                 Assert.AreEqual(expected, StringCaseConverter.GetCasePattern(source));
 
-            assert(StringCasePattern.SnakeCase, "hoge_fuga_piyo");
             assert(StringCasePattern.CamelCase, "hogeFugaPiyo");
             assert(StringCasePattern.PascalCase, "HogeFugaPiyo");
+            assert(StringCasePattern.SnakeCase, "hoge_fuga_piyo");
+            assert(StringCasePattern.ScreamingSnakeCase, "HOGE_FUGA_PIYO");
         }
 
         [TestMethod]

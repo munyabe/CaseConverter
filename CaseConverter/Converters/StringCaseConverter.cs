@@ -18,7 +18,8 @@ namespace CaseConverter.Converters
             {
                 [StringCasePattern.CamelCase] = new CamelCaseConverter(),
                 [StringCasePattern.PascalCase] = new PascalCaseConverter(),
-                [StringCasePattern.SnakeCase] = new SnakeCaseConverter()
+                [StringCasePattern.SnakeCase] = new SnakeCaseConverter(),
+                [StringCasePattern.ScreamingSnakeCase] = new ScreamingSnakeCaseConverter()
             };
 
         /// <summary>
@@ -57,17 +58,14 @@ namespace CaseConverter.Converters
         /// <returns>文字列のパターン</returns>
         internal static StringCasePattern GetCasePattern(string input)
         {
+            var isLower = char.IsLower(input[0]);
             if (input.Contains('_'))
             {
-                return StringCasePattern.SnakeCase;
-            }
-            else if (char.IsLower(input[0]))
-            {
-                return StringCasePattern.CamelCase;
+                return isLower ? StringCasePattern.SnakeCase : StringCasePattern.ScreamingSnakeCase;
             }
             else
             {
-                return StringCasePattern.PascalCase;
+                return isLower ? StringCasePattern.CamelCase : StringCasePattern.PascalCase;
             }
         }
 

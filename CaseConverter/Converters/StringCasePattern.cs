@@ -18,6 +18,11 @@
         /// <summary>
         /// スネークケースです。
         /// </summary>
-        SnakeCase
+        SnakeCase,
+
+        /// <summary>
+        /// スクリーミングスネークケースです。
+        /// </summary>
+        ScreamingSnakeCase
     }
 }
