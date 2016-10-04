@@ -49,6 +49,8 @@ namespace Test.CaseConverter.Converters
             assert(StringCasePattern.PascalCase, "HogeFugaPiyo");
             assert(StringCasePattern.SnakeCase, "hoge_fuga_piyo");
             assert(StringCasePattern.ScreamingSnakeCase, "HOGE_FUGA_PIYO");
+
+            assert(StringCasePattern.CamelCase, string.Empty);
         }
 
         [TestMethod]

@@ -58,14 +58,19 @@ namespace CaseConverter.Converters
         /// <returns>文字列のパターン</returns>
         internal static StringCasePattern GetCasePattern(string input)
         {
-            var isLower = char.IsLower(input[0]);
+            if (string.IsNullOrEmpty(input))
+            {
+                return StringCasePattern.CamelCase;
+            }
+
+            var isFirstLower = char.IsLower(input[0]);
             if (input.Contains('_'))
             {
-                return isLower ? StringCasePattern.SnakeCase : StringCasePattern.ScreamingSnakeCase;
+                return isFirstLower ? StringCasePattern.SnakeCase : StringCasePattern.ScreamingSnakeCase;
             }
             else
             {
-                return isLower ? StringCasePattern.CamelCase : StringCasePattern.PascalCase;
+                return isFirstLower ? StringCasePattern.CamelCase : StringCasePattern.PascalCase;
             }
         }
 
