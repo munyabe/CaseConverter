@@ -21,6 +21,11 @@
         SnakeCase,
 
         /// <summary>
+        /// パスカルスネークケースです。
+        /// </summary>
+        PascalSnakeCase,
+
+        /// <summary>
         /// スクリーミングスネークケースです。
         /// </summary>
         ScreamingSnakeCase

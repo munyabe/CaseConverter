@@ -63,6 +63,7 @@
     <Compile Include="Converters\PascalCaseConverterTest.cs" />
     <Compile Include="Converters\SnakeCaseConverterTest.cs" />
     <Compile Include="Converters\ScreamingSnakeCaseConverterTest.cs" />
+    <Compile Include="Converters\PascalSnakeCaseConverterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

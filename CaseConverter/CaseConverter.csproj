@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Converters\CamelCaseConverter.cs" />
+    <Compile Include="Converters\PascalSnakeCaseConverter.cs" />
     <Compile Include="Converters\ICaseConverter.cs" />
     <Compile Include="Converters\PascalCaseConverter.cs" />
     <Compile Include="Converters\ScreamingSnakeCaseConverter.cs" />

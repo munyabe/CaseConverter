@@ -19,6 +19,7 @@ namespace CaseConverter.Converters
                 [StringCasePattern.CamelCase] = new CamelCaseConverter(),
                 [StringCasePattern.PascalCase] = new PascalCaseConverter(),
                 [StringCasePattern.SnakeCase] = new SnakeCaseConverter(),
+                [StringCasePattern.PascalSnakeCase] = new PascalSnakeCaseConverter(),
                 [StringCasePattern.ScreamingSnakeCase] = new ScreamingSnakeCaseConverter()
             };
 
@@ -63,14 +64,24 @@ namespace CaseConverter.Converters
                 return StringCasePattern.CamelCase;
             }
 
-            var isFirstLower = char.IsLower(input[0]);
             if (input.Contains('_'))
             {
-                return isFirstLower ? StringCasePattern.SnakeCase : StringCasePattern.ScreamingSnakeCase;
+                if (input.Length == 1)
+                {
+                    return StringCasePattern.SnakeCase;
+                }
+                else if (input.All(x => char.IsUpper(x) || x == '_'))
+                {
+                    return StringCasePattern.ScreamingSnakeCase;
+                }
+                else
+                {
+                    return char.IsUpper(input[0]) ? StringCasePattern.PascalSnakeCase : StringCasePattern.SnakeCase;
+                }
             }
             else
             {
-                return isFirstLower ? StringCasePattern.CamelCase : StringCasePattern.PascalCase;
+                return char.IsUpper(input[0]) ? StringCasePattern.PascalCase : StringCasePattern.CamelCase;
             }
         }
 

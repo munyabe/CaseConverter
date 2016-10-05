@@ -48,7 +48,20 @@ namespace Test.CaseConverter.Converters
             assert(StringCasePattern.CamelCase, "hogeFugaPiyo");
             assert(StringCasePattern.PascalCase, "HogeFugaPiyo");
             assert(StringCasePattern.SnakeCase, "hoge_fuga_piyo");
+            assert(StringCasePattern.PascalSnakeCase, "Hoge_Fuga_Piyo");
             assert(StringCasePattern.ScreamingSnakeCase, "HOGE_FUGA_PIYO");
+
+            assert(StringCasePattern.SnakeCase, "_");
+            assert(StringCasePattern.CamelCase, "-");
+
+            assert(StringCasePattern.SnakeCase, "h_");
+            assert(StringCasePattern.SnakeCase, "h_H");
+            assert(StringCasePattern.PascalSnakeCase, "Ho_");
+            assert(StringCasePattern.ScreamingSnakeCase, "H_");
+
+            assert(StringCasePattern.SnakeCase, "_h_");
+            assert(StringCasePattern.SnakeCase, "_Ho_");
+            assert(StringCasePattern.ScreamingSnakeCase, "_H_");
 
             assert(StringCasePattern.CamelCase, string.Empty);
         }
