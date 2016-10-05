@@ -71,6 +71,7 @@
     <Compile Include="ConvertCaseCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Converters\StringCasePattern.cs" />
+    <Compile Include="Utils\StringUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />

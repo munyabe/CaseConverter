@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
+using CaseConverter.Utils;
 
 namespace CaseConverter.Converters
 {
@@ -15,10 +17,8 @@ namespace CaseConverter.Converters
             var isFirst = true;
             foreach (var word in words)
             {
-                var top = isFirst ? char.ToLower(word[0]) : char.ToUpper(word[0]);
+                result.Append(isFirst ? CultureInfo.CurrentCulture.TextInfo.ToLower(word) : StringUtil.ToFirstUpper(word));
                 isFirst = false;
-
-                result.Append(top + word.Substring(1, word.Length - 1).ToLower());
             }
 
             return result.ToString();

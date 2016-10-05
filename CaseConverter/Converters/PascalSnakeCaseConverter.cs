@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CaseConverter.Utils;
 
 namespace CaseConverter.Converters
 {
@@ -11,8 +12,7 @@ namespace CaseConverter.Converters
         /// <inheritdoc />
         public string Convert(IEnumerable<string> words)
         {
-            var camelWords = words.Select(word => char.ToUpper(word[0]) + word.Substring(1, word.Length - 1).ToLower());
-            return string.Join("_", camelWords);
+            return string.Join("_", words.Select(StringUtil.ToFirstUpper));
         }
     }
 }

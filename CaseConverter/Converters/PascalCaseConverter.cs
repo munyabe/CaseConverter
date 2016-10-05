@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using CaseConverter.Utils;
 
 namespace CaseConverter.Converters
 {
@@ -14,7 +15,7 @@ namespace CaseConverter.Converters
             var result = new StringBuilder();
             foreach (var word in words)
             {
-                result.Append(char.ToUpper(word[0]) + word.Substring(1, word.Length - 1).ToLower());
+                result.Append(StringUtil.ToFirstUpper(word));
             }
 
             return result.ToString();
