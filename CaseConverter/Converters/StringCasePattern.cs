@@ -28,6 +28,11 @@
         /// <summary>
         /// スクリーミングスネークケースです。
         /// </summary>
-        ScreamingSnakeCase
+        ScreamingSnakeCase,
+
+        /// <summary>
+        /// ケバブケースです。
+        /// </summary>
+        KebabCase
     }
 }
