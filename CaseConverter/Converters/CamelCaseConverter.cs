@@ -13,6 +13,11 @@ namespace CaseConverter.Converters
         /// <inheritdoc />
         public string Convert(IEnumerable<string> words)
         {
+            if (words == null)
+            {
+                return string.Empty;
+            }
+
             var result = new StringBuilder();
             var isFirst = true;
             foreach (var word in words)

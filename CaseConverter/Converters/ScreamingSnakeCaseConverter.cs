@@ -12,6 +12,11 @@ namespace CaseConverter.Converters
         /// <inheritdoc />
         public string Convert(IEnumerable<string> words)
         {
+            if (words == null)
+            {
+                return string.Empty;
+            }
+
             return string.Join("_", words.Select(CultureInfo.CurrentCulture.TextInfo.ToUpper));
         }
     }

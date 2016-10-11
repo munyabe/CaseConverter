@@ -24,6 +24,9 @@ namespace Test.CaseConverter.Converters
 
             assert(singleWord, new[] { "hoge" });
             assert(singleWord, new[] { "HOGE" });
+
+            assert(string.Empty, null);
+            assert(string.Empty, new string[0]);
         }
     }
 }
