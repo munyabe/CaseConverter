@@ -58,6 +58,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Converters\CaseConverterTestBase.cs" />
     <Compile Include="Converters\StringCaseConverterTest.cs" />
     <Compile Include="Converters\CamelCaseConverterTest.cs" />
     <Compile Include="Converters\PascalCaseConverterTest.cs" />
