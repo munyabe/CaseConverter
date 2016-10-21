@@ -12,7 +12,7 @@ namespace Test.CaseConverter.Converters
         [TestMethod]
         public void ConvertTest()
         {
-            ConvertTest("Hoge_Fuga_Piyo", "Hoge");
+            ConvertTest("Hoge_Fuga_Piyo", "Hoge", "H");
         }
     }
 }
