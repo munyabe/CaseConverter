@@ -84,9 +84,13 @@ namespace CaseConverter.Converters
             {
                 return StringCasePattern.KebabCase;
             }
+            else if (char.IsUpper(input[0]))
+            {
+                return 1 < input.Length && input.Skip(1).All(x => char.IsUpper(x)) ? StringCasePattern.ScreamingSnakeCase : StringCasePattern.PascalCase;
+            }
             else
             {
-                return char.IsUpper(input[0]) ? StringCasePattern.PascalCase : StringCasePattern.CamelCase;
+                return StringCasePattern.CamelCase;
             }
         }
 
