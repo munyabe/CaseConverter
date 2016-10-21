@@ -2,14 +2,14 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using CaseConverter.Converters;
 
 namespace CaseConverter.Options
 {
     /// <summary>
-    /// 列挙体の配列を1つの文字列に変換するコンバーターです。
+    /// <see cref="PatternOption"/>の配列を1つの文字列に変換するコンバーターです。
     /// </summary>
-    /// <typeparam name="TEnum">対象の列挙体の型</typeparam>
-    public class EnumArrayConverter<TEnum> : ArrayConverter where TEnum : struct
+    public class PatternOptionsConverter : ArrayConverter
     {
         /// <summary>
         /// 複数の列挙体を分けるセパレーターです。
@@ -32,37 +32,33 @@ namespace CaseConverter.Options
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
             var source = value as string;
-
             if (string.IsNullOrEmpty(source))
             {
                 return base.ConvertFrom(context, culture, value);
             }
-            else
-            {
-                return source.Split(new[] { SEPARATOR }, StringSplitOptions.None)
-                    .Select(ParseOrDefault)
-                    .ToArray();
-            }
+
+            return source.Split(new[] { SEPARATOR }, StringSplitOptions.None)
+                .Select(x => ParseOrDefault<StringCasePattern>(x))
+                .Select(x => new PatternOption { Pattern = x })
+                .ToArray();
         }
 
         /// <inheritdoc />
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            var array = value as TEnum[];
-            if (array != null)
-            {
-                return string.Join(SEPARATOR, array);
-            }
-            else
+            var array = value as PatternOption[];
+            if (array == null)
             {
                 return base.ConvertTo(context, culture, value, destinationType);
             }
+
+            return string.Join(SEPARATOR, array.Select(x => x.Pattern));
         }
 
         /// <summary>
         /// 指定の文字列を列挙体に変換できればその値を、できない場合はデフォルト値を返します。
         /// </summary>
-        private static TEnum ParseOrDefault(string value)
+        private static TEnum ParseOrDefault<TEnum>(string value) where TEnum : struct
         {
             TEnum result;
             return Enum.TryParse(value, out result) ? result : default(TEnum);

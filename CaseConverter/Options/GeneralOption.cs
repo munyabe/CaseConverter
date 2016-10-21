@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using CaseConverter.Converters;
 
 namespace CaseConverter.Options
@@ -9,18 +11,24 @@ namespace CaseConverter.Options
     public class GeneralOption
     {
         /// <summary>
-        /// 文字列の変換パターンを取得または設定します。
+        /// 文字列の変換パターンのオプションを取得または設定します。
         /// </summary>
         [Category("Basic")]
         [DisplayName("Conversion Pattern")]
         [Description("This is an order to convert a string.")]
-        [TypeConverter(typeof(StringCasePatternArrayConverter))]
-        public StringCasePattern[] Patterns { get; set; } =
+        [TypeConverter(typeof(PatternOptionsConverter))]
+        public PatternOption[] PatternOptions { get; set; } =
             new[]
             {
-                StringCasePattern.SnakeCase,
-                StringCasePattern.CamelCase,
-                StringCasePattern.PascalCase
+                new PatternOption { Pattern = StringCasePattern.SnakeCase },
+                new PatternOption { Pattern = StringCasePattern.CamelCase },
+                new PatternOption { Pattern = StringCasePattern.PascalCase }
             };
+
+        /// <summary>
+        /// 文字列の変換パターンを取得または設定します。
+        /// </summary>
+        [Browsable(false)]
+        public IEnumerable<StringCasePattern> Patterns => PatternOptions.Select(x => x.Pattern);
     }
 }
