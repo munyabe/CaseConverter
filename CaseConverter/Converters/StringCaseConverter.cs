@@ -108,7 +108,7 @@ namespace CaseConverter.Converters
                 return Enumerable.Empty<string>();
             }
 
-            return Regex.Matches(input, @"[a-z\d]+|[A-Z\d]+(?![A-Za-z\d])|[A-Z\d]+(?=[A-Z])|[A-Z][a-z\d]*").GetValues();
+            return Regex.Matches(input, @"[\p{Ll}\d]+|[\p{Lu}\d]+(?![\p{L}\d])|[\p{Lu}\d]+(?=\p{Lu})|\p{Lu}[\p{Ll}\d]*").GetValues();
         }
 
         /// <summary>

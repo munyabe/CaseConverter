@@ -43,6 +43,36 @@ namespace Test.CaseConverter.Converters
         }
 
         [TestMethod]
+        public void ConvertTestTR()
+        {
+            using (new CultureInfoContext("tr-TR"))
+            {
+                var convertPatterns = new List<StringCasePattern>
+                {
+                    StringCasePattern.CamelCase,
+                    StringCasePattern.PascalCase,
+                    StringCasePattern.SnakeCase
+                };
+
+                Action<string, string> assert = (expected, source) =>
+                    Assert.AreEqual(expected, StringCaseConverter.Convert(source, convertPatterns));
+
+                assert("saçımŞekilÖnümdenÇekil", "saçım_şekil_önümden_çekil");
+                assert("SaçımŞekilÖnümdenÇekil", "saçımŞekilÖnümdenÇekil");
+                assert("saçım_şekil_önümden_çekil", "SaçımŞekilÖnümdenÇekil");
+
+                assert(null, null);
+                assert(string.Empty, string.Empty);
+                assert(" ", " ");
+                assert("123", "123");
+                assert("+-*", "+-*");
+
+                Assert.AreEqual("saçım_şekil_önümden_çekil", StringCaseConverter.Convert("saçım_şekil_önümden_çekil", null));
+                Assert.AreEqual("saçım_şekil_önümden_çekil", StringCaseConverter.Convert("saçım_şekil_önümden_çekil", new List<StringCasePattern>()));
+            }
+        }
+
+        [TestMethod]
         public void GetCasePatternTest()
         {
             using (new CultureInfoContext("en-US"))
@@ -78,6 +108,47 @@ namespace Test.CaseConverter.Converters
                 assert(StringCasePattern.SnakeCase, "_Ho_");
                 assert(StringCasePattern.ScreamingSnakeCase, "_H_");
                 assert(StringCasePattern.SnakeCase, "_h-");
+
+                assert(StringCasePattern.CamelCase, string.Empty);
+            }
+        }
+
+        [TestMethod]
+        public void GetCasePatternTestTR()
+        {
+            using (new CultureInfoContext("tr-TR"))
+            {
+                Action<StringCasePattern, string> assert = (expected, source) =>
+                    Assert.AreEqual(expected, StringCaseConverter.GetCasePattern(source));
+
+                assert(StringCasePattern.CamelCase, "saçımŞekilÖnümdenÇekil");
+                assert(StringCasePattern.PascalCase, "SaçımŞekilÖnümdenÇekil");
+                assert(StringCasePattern.SnakeCase, "saçım_şekil_önümden_çekil");
+                assert(StringCasePattern.PascalSnakeCase, "Saçım_Şekil_Önümden_Çekil");
+                assert(StringCasePattern.ScreamingSnakeCase, "SAÇIM_ŞEKİL_ÖNÜMDEN_ÇEKİL");
+                assert(StringCasePattern.KebabCase, "saçım-şekil-önümden-çekil");
+
+                assert(StringCasePattern.CamelCase, "şekil");
+                assert(StringCasePattern.PascalCase, "Şekil");
+                assert(StringCasePattern.ScreamingSnakeCase, "ŞEKİL");
+
+                assert(StringCasePattern.CamelCase, "i");
+                assert(StringCasePattern.PascalCase, "İ");
+
+                assert(StringCasePattern.SnakeCase, "_");
+                assert(StringCasePattern.KebabCase, "-");
+                assert(StringCasePattern.CamelCase, "=");
+
+                assert(StringCasePattern.SnakeCase, "h_");
+                assert(StringCasePattern.SnakeCase, "i_Ş");
+                assert(StringCasePattern.PascalSnakeCase, "Şi_");
+                assert(StringCasePattern.ScreamingSnakeCase, "Ş_");
+                assert(StringCasePattern.KebabCase, "Ş-");
+
+                assert(StringCasePattern.SnakeCase, "_i_");
+                assert(StringCasePattern.SnakeCase, "_Şi_");
+                assert(StringCasePattern.ScreamingSnakeCase, "_İ_");
+                assert(StringCasePattern.SnakeCase, "_i-");
 
                 assert(StringCasePattern.CamelCase, string.Empty);
             }
@@ -131,6 +202,63 @@ namespace Test.CaseConverter.Converters
                 assert(new[] { "Hoge", "Fuga", "Piyo" }, "Hoge+Fuga-Piyo*");
                 assert(new[] { "Hoge", "Fuga", "Piyo" }, "+Hoge-Fuga*Piyo");
                 assert(new[] { "Hoge", "Fuga", "Piyo" }, "Hoge+-Fuga**Piyo");
+
+                // MEMO : 単語がない場合のテスト
+                assert(new string[0], null);
+                assert(new string[0], string.Empty);
+                assert(new string[0], " ");
+                assert(new string[0], "+-*");
+            }
+        }
+
+        [TestMethod]
+        public void GetWordsTestTR()
+        {
+            using (new CultureInfoContext("tr-TR"))
+            {
+                Action<string[], string> assert = (expected, source) =>
+                    CollectionAssert.AreEquivalent(expected, StringCaseConverter.GetWords(source).ToArray());
+
+                assert(new[] { "Saçım", "Şekil", "Önümden", "Çekil" }, "SaçımŞekilÖnümdenÇekil");
+                assert(new[] { "saçım", "Şekil", "Önümden", "Çekil" }, "saçımŞekilÖnümdenÇekil");
+                assert(new[] { "SAÇIM", "Şekil", "Önümden", "Çekil" }, "SAÇIMŞekilÖnümdenÇekil");
+                assert(new[] { "Saçım", "Şekil", "Önümden", "ÇEKİL" }, "SaçımŞekilÖnümdenÇEKİL");
+                assert(new[] { "Saçım", "Şekil", "Önümden", "Ç" }, "SaçımŞekilÖnümdenÇ");
+
+                // MEMO : 数字を含んだテスト
+                assert(new[] { "Saçım", "Şe1kil", "Önümden" }, "SaçımŞe1kilÖnümden");
+                assert(new[] { "sa1çım2", "Şekil", "Önümden" }, "sa1çım2ŞekilÖnümden");
+                assert(new[] { "Saçım", "Şekil1", "ÖN2ÜMDEN3" }, "SaçımŞekil1ÖN2ÜMDEN3");
+                assert(new[] { "Saçım", "ŞE1KİL", "Önümden" }, "SaçımŞE1KİLÖnümden");
+                assert(new[] { "123" }, "123");
+
+                // MEMO : 1単語のテスト
+                assert(new[] { "şekil" }, "şekil");
+                assert(new[] { "ŞEKİL" }, "ŞEKİL");
+                assert(new[] { "şe1kil2" }, "şe1kil2");
+                assert(new[] { "1şekil" }, "1şekil");
+                assert(new[] { "1", "ŞEKİL" }, "1ŞEKİL");
+
+                // MEMO : 空白を含んだテスト
+                assert(new[] { "Saçım", "Şekil", "Önümden" }, "Saçım Şekil Önümden");
+                assert(new[] { "Saçım", "Şekil", "Önümden" }, "Saçım ŞekilÖnümden");
+                assert(new[] { "saçım", "şekil", "Önümden" }, "saçım şekil Önümden");
+                assert(new[] { "saçım", "şekil", "Önümden" }, "saçım şekilÖnümden");
+
+                // MEMO : スネークケースのテスト
+                assert(new[] { "saçım", "şekil", "önümden" }, "saçım_şekil_önümden");
+                assert(new[] { "SAÇIM", "ŞEKİL", "ÖNÜMDEN" }, "SAÇIM_ŞEKİL_ÖNÜMDEN");
+                assert(new[] { "saçım", "ş", "önümden" }, "saçım_ş_önümden");
+                assert(new[] { "saçım", "Ş", "önümden" }, "saçım_Ş_önümden");
+                assert(new[] { "SAÇIM", "1", "ŞEKİL", "ÖNÜMDEN" }, "SAÇIM_1ŞEKİL_ÖNÜMDEN");
+                assert(new[] { "SAÇIM", "ŞE1KİL", "ÖNÜMDEN" }, "SAÇIM_ŞE1KİL_ÖNÜMDEN");
+                assert(new[] { "SAÇIM", "ŞEKİL1", "ÖNÜMDEN" }, "SAÇIM_ŞEKİL1_ÖNÜMDEN");
+
+                // MEMO : 記号を含んだテスト
+                assert(new[] { "Saçım", "Şekil", "Önümden" }, "Saçım+Şekil-Önümden");
+                assert(new[] { "Saçım", "Şekil", "Önümden" }, "Saçım+Şekil-Önümden*");
+                assert(new[] { "Saçım", "Şekil", "Önümden" }, "+Saçım-Şekil*Önümden");
+                assert(new[] { "Saçım", "Şekil", "Önümden" }, "Saçım+-Şekil**Önümden");
 
                 // MEMO : 単語がない場合のテスト
                 assert(new string[0], null);

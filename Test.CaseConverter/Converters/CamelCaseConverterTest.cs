@@ -14,5 +14,11 @@ namespace Test.CaseConverter.Converters
         {
             ConvertTest("hogeFugaPiyo", "hoge", "h");
         }
+
+        [TestMethod]
+        public void ConvertTestTR()
+        {
+            ConvertTestTR("saçımŞekilÖnümdenÇekil", "şekil", "i");
+        }
     }
 }
