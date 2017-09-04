@@ -15,21 +15,24 @@ namespace Test.CaseConverter.Converters
         /// </summary>
         protected void ConvertTest(string multiWords, string singleWord, string singleCharacter)
         {
-            var converter = new TConverter();
-            Action<string, string[]> assert = (expected, source) =>
-                Assert.AreEqual(expected, converter.Convert(source));
+            using (new CultureInfoContext("en-US"))
+            {
+                var converter = new TConverter();
+                Action<string, string[]> assert = (expected, source) =>
+                    Assert.AreEqual(expected, converter.Convert(source));
 
-            assert(multiWords, new[] { "hoge", "fuga", "piyo" });
-            assert(multiWords, new[] { "HOGE", "fuga", "piyo" });
+                assert(multiWords, new[] { "hoge", "fuga", "piyo" });
+                assert(multiWords, new[] { "HOGE", "fuga", "piyo" });
 
-            assert(singleWord, new[] { "hoge" });
-            assert(singleWord, new[] { "HOGE" });
+                assert(singleWord, new[] { "hoge" });
+                assert(singleWord, new[] { "HOGE" });
 
-            assert(singleCharacter, new[] { "h" });
-            assert(singleCharacter, new[] { "H" });
+                assert(singleCharacter, new[] { "h" });
+                assert(singleCharacter, new[] { "H" });
 
-            assert(string.Empty, null);
-            assert(string.Empty, new string[0]);
+                assert(string.Empty, null);
+                assert(string.Empty, new string[0]);
+            }
         }
     }
 }
