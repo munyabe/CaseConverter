@@ -62,6 +62,10 @@ namespace CaseConverter
                         foreach (TextRange item in selection.TextRanges)
                         {
                             var text = item.StartPoint.GetText(item.EndPoint);
+                            if (string.IsNullOrEmpty(text))
+                            {
+                                continue;
+                            }
                             int options = (int)(vsFindOptions.vsFindOptionsMatchWholeWord |
                                               vsFindOptions.vsFindOptionsMatchCase |
                                               vsFindOptions.vsFindOptionsMatchInHiddenText |
