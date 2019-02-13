@@ -55,8 +55,30 @@ namespace CaseConverter
                 var selection = textDocument.Selection;
                 if (selection.IsEmpty == false)
                 {
-                    var selectedText = selection.Text;
-                    selection.ReplaceText(selectedText, StringCaseConverter.Convert(selectedText, convertPatterns));
+                    //var selectedText = selection.Text;
+                    //selection.ReplaceText(selectedText, StringCaseConverter.Convert(selectedText, convertPatterns));
+                    if (selection.TextRanges.Count > 1)
+                    {
+                        foreach (TextRange item in selection.TextRanges)
+                        {
+                            var text = item.StartPoint.GetText(item.EndPoint);
+                            int options = (int)(vsFindOptions.vsFindOptionsMatchWholeWord |
+                                              vsFindOptions.vsFindOptionsMatchCase |
+                                              vsFindOptions.vsFindOptionsMatchInHiddenText |
+                                              vsFindOptions.vsFindOptionsSearchSubfolders |
+                                              vsFindOptions.vsFindOptionsKeepModifiedDocumentsOpen);
+                            dte.Find.FindReplace(vsFindAction.vsFindActionReplaceAll,
+                                text,
+                                options,
+                               StringCaseConverter.Convert(text, convertPatterns),
+                                vsFindTarget.vsFindTargetCurrentDocumentSelection, ResultsLocation: vsFindResultsLocation.vsFindResultsNone);
+                        }
+                    }
+                    else
+                    {
+                        var selectedText = selection.Text;
+                        selection.ReplaceText(selectedText, StringCaseConverter.Convert(selectedText, convertPatterns));
+                    }
                 }
                 else
                 {
