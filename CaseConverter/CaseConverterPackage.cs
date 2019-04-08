@@ -9,7 +9,7 @@ namespace CaseConverter
     /// 拡張機能として配置されるパッケージです。
     /// </summary>
     [PackageRegistration(UseManagedResourcesOnly = true)]
-    [InstalledProductRegistration("#110", "#112", "2.2", IconResourceID = 400)] // Visual Studio のヘルプ/バージョン情報に表示される情報です。
+    [InstalledProductRegistration("#110", "#112", "2.3", IconResourceID = 400)] // Visual Studio のヘルプ/バージョン情報に表示される情報です。
     [Guid(PackageGuidString)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideOptionPage(typeof(GeneralOptionPage), PackageName, "General", 100, 101, true)]
