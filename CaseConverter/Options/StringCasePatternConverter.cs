@@ -22,7 +22,8 @@ namespace CaseConverter.Options
             [StringCasePattern.SnakeCase] = "snake_case",
             [StringCasePattern.PascalSnakeCase] = "Pascal_Snake_Case",
             [StringCasePattern.ScreamingSnakeCase] = "SCREAMING_SNAKE_CASE",
-            [StringCasePattern.KebabCase] = "kebab-case"
+            [StringCasePattern.KebabCase] = "kebab-case",
+            [StringCasePattern.SpacedPascalCase] = "Spaced Pascal Case"
         };
 
         /// <summary>

@@ -59,6 +59,7 @@
     <Compile Include="Converters\ICaseConverter.cs" />
     <Compile Include="Converters\PascalCaseConverter.cs" />
     <Compile Include="Converters\ScreamingSnakeCaseConverter.cs" />
+    <Compile Include="Converters\SpacedPascalCaseConverter.cs" />
     <Compile Include="Converters\SnakeCaseConverter.cs" />
     <Compile Include="Options\GeneralOption.cs" />
     <Compile Include="Options\GeneralOptionPage.cs">
