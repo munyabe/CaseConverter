@@ -21,7 +21,8 @@ namespace CaseConverter.Converters
                 [StringCasePattern.SnakeCase] = new SnakeCaseConverter(),
                 [StringCasePattern.PascalSnakeCase] = new PascalSnakeCaseConverter(),
                 [StringCasePattern.ScreamingSnakeCase] = new ScreamingSnakeCaseConverter(),
-                [StringCasePattern.KebabCase] = new KebabCaseConverter()
+                [StringCasePattern.KebabCase] = new KebabCaseConverter(),
+                [StringCasePattern.SpacedPascalCase] = new SpacedPascalCaseConverter()
             };
 
         /// <summary>
@@ -83,6 +84,10 @@ namespace CaseConverter.Converters
             else if (input.Contains('-'))
             {
                 return StringCasePattern.KebabCase;
+            }
+            else if (input.Contains(' '))
+            {
+                return StringCasePattern.SpacedPascalCase;
             }
             else if (char.IsUpper(input[0]))
             {

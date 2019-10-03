@@ -33,6 +33,11 @@
         /// <summary>
         /// ケバブケースです。
         /// </summary>
-        KebabCase
+        KebabCase,
+
+        /// <summary>
+        /// スペースを含むパスカルケース。
+        /// </summary>
+        SpacedPascalCase
     }
 }
