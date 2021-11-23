@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>7a754992-ea1c-4717-a4bb-22104f6b998d</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>CaseConverterShared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)CaseConverterPackage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CommandBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConvertCaseCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\CamelCaseConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ICaseConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\KebabCaseConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\PascalCaseConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\PascalSnakeCaseConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ScreamingSnakeCaseConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\SnakeCaseConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\StringCaseConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\StringCasePattern.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Options\GeneralOption.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Options\GeneralOptionPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Options\PatternOption.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Options\PatternOptionsConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Options\StringCasePatternConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\StringUtil.cs" />
+  </ItemGroup>
+</Project>

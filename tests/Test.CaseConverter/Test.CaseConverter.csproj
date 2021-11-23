@@ -70,7 +70,7 @@
     <Compile Include="Utils\StringUtilTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CaseConverter\CaseConverter.csproj">
+    <ProjectReference Include="..\..\src\CaseConverter\CaseConverter.csproj">
       <Project>{664e8280-457a-4177-87e9-96b0dce7bec1}</Project>
       <Name>CaseConverter</Name>
     </ProjectReference>
